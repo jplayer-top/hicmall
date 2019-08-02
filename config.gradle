@@ -1,0 +1,195 @@
+ext {
+
+    android = [
+            applicationId    : "com.wmtc.wmt",
+            compileSdkVersion: 29,
+            buildToolsVersion: "29.0.0",
+            minSdkVersion    : 19,
+            targetSdkVersion : 29,
+            versionCode      : 10,
+            versionName      : "1.0.10",
+            debug            : true
+    ]
+
+    dependVersion = [
+            androidSupportSdkVersion: "28.0.0",
+            retrofitSdkVersion      : "2.3.0",
+            glideSdkVersion         : "4.3.1",
+            rxJava                  : "2.1.5",
+            rxAndroid               : "2.0.1"
+    ]
+
+    url = [
+            "debug"  : "https://app.weimeitao.com/",
+            "release": "https://app.weimeitao.com/",
+    ]
+
+    key_store = [
+            "keyAlias"     : "wmtc",
+            "keyPassword"  : "wmtcwmt",
+            "storeFile"    : "../wmt.jks",
+            "storePassword": "wmtcwmt"
+    ]
+
+    key_rong = [
+            "debug"  : "x18ywvqfxndcc",
+            "release": "x18ywvqfxndcc"
+    ]
+    greendao = [
+            "greendao"     : 'org.greenrobot:greendao:3.2.2',
+            "schemaVersion": 1,
+            "targetGenDir" : "src/main/java",
+    ]
+    androidx = [
+            appcompat   : 'androidx.appcompat:appcompat:1.0.2',
+            constraint  : 'androidx.constraintlayout:constraintlayout:1.1.3',
+            cardview    : 'androidx.cardview:cardview:1.0.0'
+    ]
+    supportDeps = [
+            //--------  support  -------
+            supportv4  : "com.android.support:support-v4:$dependVersion.androidSupportSdkVersion",
+            appcompatv7: "com.android.support:appcompat-v7:$dependVersion.androidSupportSdkVersion",
+            cardview   : "com.android.support:cardview-v7:$dependVersion.androidSupportSdkVersion",
+            design     : "com.android.support:design:$dependVersion.androidSupportSdkVersion",
+            annotations: "com.android.support:support-annotations:$dependVersion.androidSupportSdkVersion",
+            constraint : "com.android.support.constraint:constraint-layout:1.0.2",
+            palette    : "com.android.support:palette-v7:$dependVersion.androidSupportSdkVersion",
+            multidex   : "com.android.support:multidex:1.0.2"
+    ]
+
+
+    retrofit = [
+            //------ retrofit和RxJava ---------
+            retrofit                 : "com.squareup.retrofit2:retrofit:$dependVersion.retrofitSdkVersion",
+            retrofitConverterGson    : "com.squareup.retrofit2:converter-gson:$dependVersion.retrofitSdkVersion",
+            retrofitConverterProtobuf: "com.squareup.retrofit2:converter-protobuf:$dependVersion.retrofitSdkVersion",
+            retrofitConverterScalars : "com.squareup.retrofit2:converter-scalars:$dependVersion.retrofitSdkVersion",
+            retrofitAdapterRxjava2   : "com.squareup.retrofit2:adapter-rxjava2:$dependVersion.retrofitSdkVersion",
+            okhttp3LoggerInterceptor : 'com.squareup.okhttp3:logging-interceptor:3.4.1'
+    ]
+
+    rxJava = [
+            rxJava   : "io.reactivex.rxjava2:rxjava:$dependVersion.rxJava",
+            rxAndroid: "io.reactivex.rxjava2:rxandroid:$dependVersion.rxAndroid"
+    ]
+    //夜间模式皮肤
+    skin = [
+            skinBase            : 'skin.support:skin-support:3.1.0-beta1',                  // skin-support 基础控件支持
+            skinDesign          : 'skin.support:skin-support-design:3.1.0-beta1',        // skin-support-design material[可选]
+            skinCardview        : 'skin.support:skin-support-cardview:3.1.0-beta1',       // skin-support-cardview   [可选]
+            skinConstraintLayout: 'skin.support:skin-support-constraint-layout:3.1.0-beta1' // skin-support-constraint-layout
+    ]
+    //RecyclerView 适配器
+    baserecyclerviewadapterhelper = 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.3'
+    itemdecoration = 'com.yanyusong.y_divideritemdecoration:y_divideritemdecoration:2.0'
+    //V-layout 淘宝多状态布局
+    v_layout = 'com.alibaba.android:vlayout:1.2.9@aar'
+    //ViewPager Bga Viewpager
+    bga_banner = 'cn.bingoogolapple:bga-banner:2.2.3@aar'
+    //底部栏
+    navigationbar = "devlight.io:navigationtabbar:1.2.5"
+    //沉浸式
+    barlibrary = 'com.gyf.barlibrary:barlibrary:2.3.0'
+    //动画封装库
+    viewanimator = 'com.github.florent37:viewanimator:1.0.5'
+    //下拉刷新
+    smartrefresh = 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-alpha-11'
+    //特殊头部，看情况添加
+    smartrefresh_heard = 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-alpha-11'
+    //适配方案
+    autosize = 'me.jessyan:autosize:1.1.2'
+    //自定义Toast
+    toasty = 'com.github.GrenderG:Toasty:1.1.4'
+    //流布局
+    flowlayout = 'com.zhy:flowlayout-lib:1.0.3'
+    //侧滑删除
+    easySwipeMenuLayout = 'com.github.anzaizai:EasySwipeMenuLayout:1.1.1'
+    //FlycoTabLayout
+    tablayout = 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
+    // 自定义Crash
+    customactivityoncrash = 'cat.ereza:customactivityoncrash:2.2.0'
+    // 加载
+    spinkit = 'com.github.ybq:Android-SpinKit:1.2.0'
+    //PickerView
+    pickerview = 'com.contrarywind:Android-PickerView:3.2.7'
+    //权限申请
+    permission = 'com.yanzhenjie:permission:2.0.0-rc4'
+    //转场动画
+    YcShareElement = 'com.github.yellowcath:YcShareElement:1.3.1'
+
+    //二维码
+    qcode = 'cn.yipianfengye.android:zxing-library:2.2'
+    //图片选择器
+    imagespickers = 'com.jaikydota.imagespickers:imagespickers:1.0.6'
+    //多边形图+图片滤镜
+    polygon = 'com.kingja.magicmirror:magicmirror:1.2.0'
+    //数据库 实时增删改查
+    debugDB = 'com.amitshekhar.android:debug-db:1.0.4'
+    // 字体工具 ticker
+    ticker = 'com.robinhood.ticker:ticker:2.0.1'
+    //仿微信滑动返回
+    swipebacklayout = 'cn.bingoogolapple:bga-swipebacklayout:1.1.8@aar'
+    //毛玻璃效果
+    realtimeblurview = 'com.github.mmin18:realtimeblurview:1.1.2'
+    /** to use need
+     * android {*  buildToolsVersion '24.0.2'                 // Use 23.0.3 or higher
+     *  defaultConfig {minSdkVersion 15
+     *  renderscriptTargetApi 19
+     *  renderscriptSupportModeEnabled true    // Enable RS support
+     *}*/
+    glide = "com.github.bumptech.glide:glide:$dependVersion.glideSdkVersion"
+    glideCompiler = "com.github.bumptech.glide:compiler:$dependVersion.glideSdkVersion"
+    glideOkhttp = "com.github.bumptech.glide:okhttp3-integration:$dependVersion.glideSdkVersion"
+
+
+    supportLibs = supportDeps.values()
+    networkLibs = retrofit.values()
+    rxJavaLibs = rxJava.values()
+    skinLibs = skin.values()
+    otherLibs = [barlibrary,
+                 glide,
+                 smartrefresh,
+                 smartrefresh_heard,
+                 itemdecoration,
+                 viewanimator,
+                 toasty,
+                 pickerview,
+                 flowlayout,
+                 permission,
+                 spinkit,
+                 qcode,
+                 tablayout,
+                 polygon,
+                 swipebacklayout,
+                 ticker,
+                 autosize,
+                 customactivityoncrash,
+                 imagespickers,
+                 easySwipeMenuLayout]
+    annotationProcessorLibs = [glideCompiler]
+
+}
+
+tasks {
+    task delTask {
+        doLast {
+            //读取文件，并装进List。
+            def list = []
+            new File('del.file').withReader('UTF-8') { reader ->
+                reader.eachLine {
+                    if (it.contains("path")) {
+                        def pre = it.indexOf("'") + 1
+                        def aft = it.lastIndexOf("'")
+                        list.add(it.substring(pre, aft))
+                    }
+                }
+                if (list.size() > 0) {
+                    File fileDel = new File(list.get(0))
+                    println(">>>>>> 要删除的文件夹路径：" + fileDel.getAbsolutePath())
+                    def isDel = fileDel.deleteDir()
+                    println(">>>>>> 文件夹是否删除：" + isDel)
+                }
+            }
+        }
+    }
+}
