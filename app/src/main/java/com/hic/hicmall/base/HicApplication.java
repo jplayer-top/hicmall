@@ -1,4 +1,4 @@
-package com.hic.hicmall;
+package com.hic.hicmall.base;
 
 
 import android.annotation.SuppressLint;
@@ -7,7 +7,6 @@ import android.content.Context;
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 import io.reactivex.Observable;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 import top.jplayer.baseprolibrary.BaseInitApplication;
