@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.StrictMode;
 import android.util.ArrayMap;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 
 import java.lang.ref.WeakReference;
@@ -65,11 +66,20 @@ public class BaseInitApplication {
         return mInit;
     }
 
-    public BaseInitApplication crash(boolean debug) {
+    public BaseInitApplication aRouter() {
+        if (BuildConfig.IsDebug) {
+            ARouter.openLog();
+            ARouter.openDebug();
+        }
+        ARouter.init(mWeakReference.get());
+        return this;
+    }
+
+    public BaseInitApplication crash() {
         CaocConfig.Builder.create()
                 .backgroundMode(CaocConfig.BACKGROUND_MODE_SILENT) //default: CaocConfig.BACKGROUND_MODE_SHOW_CUSTOM
                 .enabled(true) //default: true
-                .showErrorDetails(debug) //default: true
+                .showErrorDetails(BuildConfig.IsDebug) //default: true
                 .showRestartButton(true) //default: true
                 .logErrorOnRestart(false) //default: true
                 .trackActivities(true) //default: false

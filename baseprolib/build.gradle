@@ -11,6 +11,9 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 includeCompileClasspath true
+                arguments = [
+                        AROUTER_MODULE_NAME  : project.getName()
+                ]
             }
         }
         ndk {
@@ -52,6 +55,7 @@ android {
         def android = rootProject.ext.android
         release {
             buildConfigField "String", "HOST", "\"${url["release"]}\""
+            buildConfigField "boolean", "IsDebug", "${android["debug"]}"
             buildConfigField("String", "APPID", "\"${android["applicationId"]}\"")
             minifyEnabled false // 开启混淆
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -62,6 +66,7 @@ android {
         }
         debug {
             buildConfigField "String", "HOST", "\"${url["debug"]}\""
+            buildConfigField "boolean", "IsDebug", "${android["debug"]}"
             buildConfigField("String", "APPID", "\"${android["applicationId"]}\"")
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -104,11 +109,15 @@ dependencies {
     api(rootProject.ext.glideOkhttp) {
         exclude group: 'glide-parent'
     }
-    annotationProcessor rootProject.ext.annotationProcessorLibs
-    implementation files('libs/jpinyin-1.0.jar')
-    api files('libs/tbs.jar')
+    //修复glide支持Androidx
     api "com.android.support:support-annotations:28.0.0"
     annotationProcessor "com.android.support:support-annotations:28.0.0"
+
+    annotationProcessor rootProject.ext.annotationProcessorLibs
+
+    implementation files('libs/jpinyin-1.0.jar')
+    api files('libs/tbs.jar')
+
     api project(':networklib')
     api project(':locationlib')
 }

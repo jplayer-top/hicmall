@@ -1,1 +1,1 @@
-include ':app', ':meinfo', ':common', ':networklib', ':autocode', ':locationlib', ':baseprolib'
+include ':app', ':networklib', ':autocode', ':locationlib', ':baseprolib'
