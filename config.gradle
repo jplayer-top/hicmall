@@ -1,20 +1,20 @@
 ext {
 
     android = [
-            applicationId    : "com.wmtc.wmt",
+            applicationId    : "com.hic.hicmall",
             compileSdkVersion: 29,
             buildToolsVersion: "29.0.0",
             minSdkVersion    : 19,
             targetSdkVersion : 29,
-            versionCode      : 10,
-            versionName      : "1.0.10",
+            versionCode      : 1,
+            versionName      : "1.0.0",
             debug            : true
     ]
 
     dependVersion = [
             androidSupportSdkVersion: "28.0.0",
             retrofitSdkVersion      : "2.3.0",
-            glideSdkVersion         : "4.3.1",
+            glideSdkVersion         : "4.9.0",
             rxJava                  : "2.1.5",
             rxAndroid               : "2.0.1"
     ]
@@ -25,10 +25,10 @@ ext {
     ]
 
     key_store = [
-            "keyAlias"     : "wmtc",
-            "keyPassword"  : "wmtcwmt",
-            "storeFile"    : "../wmt.jks",
-            "storePassword": "wmtcwmt"
+            "keyAlias"     : "hicAlias",
+            "keyPassword"  : "hic123456",
+            "storeFile"    : "../hicmall.jks",
+            "storePassword": "hic123456"
     ]
 
     key_rong = [
@@ -43,7 +43,13 @@ ext {
     androidx = [
             appcompat   : 'androidx.appcompat:appcompat:1.0.2',
             constraint  : 'androidx.constraintlayout:constraintlayout:1.1.3',
-            cardview    : 'androidx.cardview:cardview:1.0.0'
+            cardview    : 'androidx.cardview:cardview:1.0.0',
+            annotations : 'androidx.annotation:annotation:1.1.0',
+            multidex    : 'androidx.multidex:multidex:2.0.1',
+            recyclerview: 'androidx.recyclerview:recyclerview:1.1.0-beta01',
+            palette     : 'androidx.palette:palette:1.0.0'
+
+
     ]
     supportDeps = [
             //--------  support  -------
@@ -129,20 +135,14 @@ ext {
     ticker = 'com.robinhood.ticker:ticker:2.0.1'
     //仿微信滑动返回
     swipebacklayout = 'cn.bingoogolapple:bga-swipebacklayout:1.1.8@aar'
-    //毛玻璃效果
-    realtimeblurview = 'com.github.mmin18:realtimeblurview:1.1.2'
-    /** to use need
-     * android {*  buildToolsVersion '24.0.2'                 // Use 23.0.3 or higher
-     *  defaultConfig {minSdkVersion 15
-     *  renderscriptTargetApi 19
-     *  renderscriptSupportModeEnabled true    // Enable RS support
-     *}*/
+
     glide = "com.github.bumptech.glide:glide:$dependVersion.glideSdkVersion"
     glideCompiler = "com.github.bumptech.glide:compiler:$dependVersion.glideSdkVersion"
     glideOkhttp = "com.github.bumptech.glide:okhttp3-integration:$dependVersion.glideSdkVersion"
 
 
     supportLibs = supportDeps.values()
+    androidxLibs = androidx.values()
     networkLibs = retrofit.values()
     rxJavaLibs = rxJava.values()
     skinLibs = skin.values()
@@ -159,7 +159,7 @@ ext {
                  spinkit,
                  qcode,
                  tablayout,
-                 polygon,
+//                 polygon,
                  swipebacklayout,
                  ticker,
                  autosize,
@@ -170,26 +170,3 @@ ext {
 
 }
 
-tasks {
-    task delTask {
-        doLast {
-            //读取文件，并装进List。
-            def list = []
-            new File('del.file').withReader('UTF-8') { reader ->
-                reader.eachLine {
-                    if (it.contains("path")) {
-                        def pre = it.indexOf("'") + 1
-                        def aft = it.lastIndexOf("'")
-                        list.add(it.substring(pre, aft))
-                    }
-                }
-                if (list.size() > 0) {
-                    File fileDel = new File(list.get(0))
-                    println(">>>>>> 要删除的文件夹路径：" + fileDel.getAbsolutePath())
-                    def isDel = fileDel.deleteDir()
-                    println(">>>>>> 文件夹是否删除：" + isDel)
-                }
-            }
-        }
-    }
-}

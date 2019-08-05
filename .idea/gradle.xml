@@ -9,8 +9,12 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/autocode" />
+            <option value="$PROJECT_DIR$/baseprolib" />
             <option value="$PROJECT_DIR$/common" />
+            <option value="$PROJECT_DIR$/locationlib" />
             <option value="$PROJECT_DIR$/meinfo" />
+            <option value="$PROJECT_DIR$/networklib" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

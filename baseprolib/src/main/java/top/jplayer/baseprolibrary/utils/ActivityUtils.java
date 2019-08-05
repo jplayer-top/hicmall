@@ -1,0 +1,179 @@
+package top.jplayer.baseprolibrary.utils;
+
+import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Bundle;
+import androidx.fragment.app.FragmentActivity;
+import android.view.MotionEvent;
+
+import top.jplayer.baseprolibrary.ui.fragment.SuperBaseFragment;
+
+/**
+ * Created by Obl on 2018/1/18.
+ * top.jplayer.baseprolibrary.utils
+ */
+
+public class ActivityUtils {
+    private static ActivityUtils activityUtils;
+
+    public static synchronized ActivityUtils init() {
+        if (activityUtils == null) {
+            synchronized (ActivityUtils.class) {
+                if (activityUtils == null) {
+                    activityUtils = new ActivityUtils();
+                }
+            }
+        }
+        return activityUtils;
+    }
+
+    public void start(Activity activity, Class tClass, MotionEvent event) {
+        Intent i = new Intent(activity, tClass);
+        i.putExtra("x", (int) event.getX());
+        i.putExtra("y", (int) event.getY());
+        activity.startActivity(i);
+    }
+
+    public void start(Activity activity, String tClass, String title) {
+        start(activity, tClass, title, null);
+    }
+
+    public void start(Activity activity, String tClass, String title, Bundle bundle) {
+        try {
+            ComponentName cn = new ComponentName(activity, tClass);
+            Intent i = new Intent();
+            i.setComponent(cn);
+            if (title != null) i.putExtra("title", title);
+            if (bundle != null) i.putExtra("bundle", bundle);
+            activity.startActivity(i);
+        } catch (Exception e) {
+            e.printStackTrace();
+            ToastUtils.init().showQuickToast("无法查找Activity");
+        }
+    }
+
+    public void startOutActivity(Activity activity, String sPkg, String tClass) {
+        try {
+            ComponentName cn = new ComponentName(sPkg, tClass);
+            Intent i = new Intent();
+            i.setComponent(cn);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            activity.startActivity(i);
+        } catch (Exception e) {
+            e.printStackTrace();
+            ToastUtils.init().showQuickToast("无法查找Activity");
+        }
+    }
+
+    public void startOutActivity(Activity activity, String sPkg) {
+        try {
+            // 获取启动的intent
+            PackageManager manager = activity.getPackageManager();
+            Intent intent = manager.getLaunchIntentForPackage("com.sankuai.meituan");
+            if (intent != null) {
+                // 每次启动美团应用时，但是以重新启动应用的形式打开
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            ToastUtils.init().showQuickToast("无法查找Activity");
+        }
+    }
+
+    public void start(Activity activity, Class tClass, String title, Bundle bundle) {
+        Intent i = new Intent(activity, tClass);
+        if (title != null) i.putExtra("title", title);
+        if (bundle != null) i.putExtra("bundle", bundle);
+        activity.startActivity(i);
+    }
+
+    public void start(Activity activity, Class tClass, Bundle bundle) {
+        Intent i = new Intent(activity, tClass);
+        if (bundle != null) i.putExtra("bundle", bundle);
+        activity.startActivity(i);
+    }
+
+    public void startWithTask(Context context, Class tClass, String title, Bundle bundle) {
+        Intent i = new Intent(context, tClass);
+        if (title != null) i.putExtra("title", title);
+        if (bundle != null) i.putExtra("bundle", bundle);
+        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(i);
+    }
+
+    /**
+     * 融云 聊天开启
+     *
+     * @param clazz
+     * @param title
+     * @param type
+     * @param mFid
+     */
+    public void startConversion(Activity activity, Class clazz, String title, String type, String mFid) {
+        Intent intent = new Intent(activity, clazz);
+        intent.putExtra("title", title);
+        intent.putExtra("fid", mFid.substring(2));
+        intent.setAction("android.groupIntent.action.VIEW");
+        intent.addCategory(Intent.CATEGORY_DEFAULT);
+        intent.setData(Uri.parse("rong://com.ilanchuang.xiaoi/conversation/" + type + "/?targetId=" + mFid));
+        activity.startActivity(intent);
+    }
+
+    public void start(Activity activity, Class tClass) {
+        start(activity, tClass, null, null);
+    }
+
+    public void start(Activity activity, Class tClass, String title) {
+        start(activity, tClass, title, null);
+    }
+
+    public void startForResult(Activity activity, Class tClass, String title, Bundle bundle, int requestCode) {
+        Intent i = new Intent(activity, tClass);
+        if (title != null) i.putExtra("title", title);
+        if (bundle != null) i.putExtra("bundle", bundle);
+        activity.startActivityForResult(i, requestCode);
+    }
+
+    public void startForResult(Activity activity, Class tClass, String title, int requestCode) {
+        startForResult(activity, tClass, title, null, requestCode);
+    }
+
+    public void startForResult(Activity activity, Class tClass, int requestCode) {
+        startForResult(activity, tClass, null, null, requestCode);
+    }
+
+    /**
+     * 默认为 requestCode = 1
+     */
+    public void startForResult(Activity activity, Class tClass, String title) {
+        startForResult(activity, tClass, title, null, 1);
+    }
+
+    public void startFragmentForResult(SuperBaseFragment fragment, Class tClass, String title, int requestCode) {
+        Intent intent = new Intent();
+        if (title != null) intent.putExtra("title", title);
+        FragmentActivity activity = fragment.getActivity();
+        if (activity != null) {
+            intent.setClass(activity, tClass);
+            fragment.startActivityForResult(intent, requestCode);
+        }
+    }
+
+
+    /**
+     * 默认为 requestCode = 1
+     */
+    public void startForResult(Activity activity, Class tClass) {
+        startForResult(activity, tClass, null, null, 1);
+    }
+
+    public void startForResult(Activity activity, Class tClass, Bundle bundle, int requestCode) {
+        Intent i = new Intent(activity, tClass);
+        if (bundle != null) i.putExtra("bundle", bundle);
+        activity.startActivityForResult(i, requestCode);
+    }
+}

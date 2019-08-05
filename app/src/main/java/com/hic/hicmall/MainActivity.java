@@ -2,6 +2,7 @@ package com.hic.hicmall;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import top.jplayer.codelib.AutoMP;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -19,17 +20,13 @@ public class MainActivity extends AppCompatActivity {
     @Autowired(name = "age")
     int age;
 
+    @AutoMP
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ARouter.getInstance().inject(this);//添加在onCreate（）
         Log.e("param", name + age + age);
-        findViewById(R.id.btn).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ARouter.getInstance().build("/me/MeActivity").navigation();
-            }
-        });
+        findViewById(R.id.btn).setOnClickListener(view -> ARouter.getInstance().build("/me/MeActivity").navigation());
     }
 }

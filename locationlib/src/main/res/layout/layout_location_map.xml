@@ -1,0 +1,52 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <top.jplayer.locationlibrary.widgets.MapScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.amap.api.maps2d.MapView
+            android:id="@+id/rc_ext_amap"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <android.support.v7.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_margin="20dp"
+            app:cardBackgroundColor="@android:color/white"
+            app:cardCornerRadius="5dp"
+            app:cardElevation="1dp">
+
+            <EditText
+                android:id="@+id/rc_ext_location_marker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:background="@null"
+                android:drawableStart="@drawable/rc_ext_location_tip"
+                android:drawablePadding="8dp"
+                android:ellipsize="end"
+                android:enabled="false"
+                android:padding="10dp"
+                android:singleLine="true"
+                android:textColor="@android:color/secondary_text_light"
+                android:textSize="15sp"/>
+
+        </android.support.v7.widget.CardView>
+
+
+        <ImageView
+            android:id="@+id/rc_ext_my_location"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="end|bottom"
+            android:layout_marginEnd="15dp"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/rc_ext_locator"/>
+    </top.jplayer.locationlibrary.widgets.MapScrollView>
+</LinearLayout>

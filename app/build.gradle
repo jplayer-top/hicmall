@@ -4,23 +4,64 @@ android {
     compileSdkVersion 29
     buildToolsVersion "29.0.0"
     defaultConfig {
-        applicationId "com.hic.hicmall"
-        minSdkVersion 19
-        targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        applicationId rootProject.ext.android.applicationId
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+        resConfigs "en", "zh-rCN"
+        ndk {
+            abiFilters "armeabi-v7a"
+        }
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [ AROUTER_MODULE_NAME : project.getName() ]
+                arguments = [
+                        AROUTER_MODULE_NAME  : project.getName(),
+                        "top.jplayer.codelib": project.getName()
+                ]
+                includeCompileClasspath true
             }
         }
     }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+
+
+    signingConfigs {
+        def store = rootProject.ext.key_store
+
+        config {
+            keyAlias store["keyAlias"]
+            keyPassword store["keyPassword"]
+            storeFile file(store["storeFile"])
+            storePassword store["storePassword"]
+        }
+    }
+
+
     buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
+//        pre.initWith(release)
+//        pre { //预发布版本
+//            debuggable true
+//        }
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
     }
 }
 
@@ -28,11 +69,18 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation project(path: ':meinfo')
-    implementation project(path: ':common')
+
+    implementation project(':meinfo')
+    implementation project(':common')
+    implementation project(':baseprolib')
     implementation 'com.alibaba:arouter-api:1.5.0'
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
+
+    implementation project(':autocode')
+    annotationProcessor project(':autocode')
+
 }
