@@ -6,11 +6,13 @@ import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
+
 import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -59,14 +61,17 @@ public abstract class SuperBaseActivity extends AppCompatActivity implements ICo
         initImmersionBar();
         initSaveInstanceState(savedInstanceState);
     }
+
     @Override
     public void onResume() {
         super.onResume();
     }
+
     @Override
     public void onPause() {
         super.onPause();
     }
+
     public void initPreCreate() {
         // todo 8.0 问题 不适配 screenOrientation 与 windowIsTranslucent 公用
         if (Build.VERSION.SDK_INT == Build.VERSION_CODES.O) {
@@ -123,7 +128,7 @@ public abstract class SuperBaseActivity extends AppCompatActivity implements ICo
 
     private void initRootRecyclerView() {
         if (mRecyclerView != null) {
-            mRecyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+            mRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
         }
     }
 
@@ -190,7 +195,10 @@ public abstract class SuperBaseActivity extends AppCompatActivity implements ICo
     }
 
     private int doubleBack = 0;
-    public boolean isOpenDoubleBack = false;
+
+    public boolean isOpenDoubleBack() {
+        return false;
+    }
 
     @SuppressLint("CheckResult")
     @Override
@@ -199,7 +207,7 @@ public abstract class SuperBaseActivity extends AppCompatActivity implements ICo
         if (mSwipeBackHelper.isSliding()) {
             return;
         } else {
-            if (isOpenDoubleBack) {
+            if (isOpenDoubleBack()) {
                 if (doubleBack >= 1) {
                     super.onBackPressed();
                 } else {
