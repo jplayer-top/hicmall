@@ -54,13 +54,13 @@ public class MainActivity extends SuperBaseActivity {
         LinearLayout llMsg = superRootView.findViewById(R.id.llMsg);
         mViewList.add(llMsg);
         llMsg.setOnClickListener(v -> {
-                onTabClick((LinearLayout) v, 3);
+            onTabClick((LinearLayout) v, 3);
         });
 
         LinearLayout llMe = superRootView.findViewById(R.id.llMe);
         mViewList.add(llMe);
         llMe.setOnClickListener(v -> {
-                onTabClick((LinearLayout) v, 4);
+            onTabClick((LinearLayout) v, 4);
         });
 
         onTabClick(mViewList.get(0), 0);
@@ -100,5 +100,10 @@ public class MainActivity extends SuperBaseActivity {
     @Override
     public boolean isOpenDoubleBack() {
         return true;
+    }
+
+    @Override
+    public boolean isSupportSwipeBack() {
+        return false;
     }
 }
