@@ -93,11 +93,11 @@ public class AutoModelProcessor extends AbstractProcessor {
             MethodSpec constructorPresenter = MethodSpec.constructorBuilder()
                     .addModifiers(Modifier.PUBLIC)
                     .addParameter(TypeVariableName.get("T"), "t")
-                    .addCode("super(t);")
+                    .addStatement("super(t)")
                     .addCode(CodeBlock.builder()
                             .add("mModel = ")
                             .add("new $T", typeField)
-                            .add("($T.class);", typeServer)
+                            .addStatement("($T.class)", typeServer)
                             .build())
                     .build();
 
@@ -158,18 +158,21 @@ public class AutoModelProcessor extends AbstractProcessor {
                                 .add(CodeBlock.builder()
                                         .add("new $T", observer)
                                         .add("<$T>", bean)
-                                        .add("(){")
+                                        .add("()")
+                                        .beginControlFlow("")
                                         .add("$L", MethodSpec.methodBuilder("responseSuccess")
                                                 .addModifiers(Modifier.PUBLIC)
+                                                .addStatement("//responseSuccess")
                                                 .addParameter(bean, "bean")
                                                 .build())
                                         .add("$L", MethodSpec.methodBuilder("responseFail")
                                                 .addModifiers(Modifier.PUBLIC)
+                                                .addStatement("//responseFail")
                                                 .addParameter(bean, "bean")
                                                 .build())
                                         .add("}")
                                         .build())
-                                .add(");")
+                                .addStatement(")")
                                 .build();
 
                         MethodSpec methodSpecPresenter = MethodSpec

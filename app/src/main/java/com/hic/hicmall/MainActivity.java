@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import top.jplayer.baseprolibrary.ui.activity.SuperBaseActivity;
+import top.jplayer.codelib.AutoMP;
 
 public class MainActivity extends SuperBaseActivity {
     FrameLayout mFlFragment;
