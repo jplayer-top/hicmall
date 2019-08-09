@@ -6,8 +6,8 @@ ext {
             buildToolsVersion: "29.0.0",
             minSdkVersion    : 19,
             targetSdkVersion : 29,
-            versionCode      : 1,
-            versionName      : "1.0.0",
+            versionCode      : getGitCommitCount(),
+            versionName      : getVersionName(),
             debug            : true
     ]
 
@@ -174,4 +174,31 @@ ext {
                                aRouterCompiler]
 
 }
+
+static def getVersionName() {
+
+    return getGitBranch() + "_" + getGitSHA()
+}
+
+//获取Git 分支名，参考 https://blog.csdn.net/ouyang_peng/article/details/77802596
+static def getGitBranch() {
+    return 'git symbolic-ref --short -q HEAD'.execute().text.trim() //例如 master
+}
+
+//获取Git Tag
+static def getGitTag() {
+    return 'git describe --tags'.execute([], project.rootDir).text.trim() //例如 bqt20094
+    //注意，如果没有设置 tag 的话结果为：fatal: No names found, cannot describe anything.
+}
+
+//获取Git 版本号
+static def getGitSHA() {
+    return 'git rev-parse --short HEAD'.execute().text.trim()  //例如 3d5851e
+}
+
+//获取Git 提交次数
+static def getGitCommitCount() {
+    return 'git rev-list --count HEAD'.execute().text.trim().toInteger() //例如 8
+}
+
 
